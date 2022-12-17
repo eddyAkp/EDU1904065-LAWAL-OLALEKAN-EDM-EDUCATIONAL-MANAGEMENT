@@ -1,8 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
 
-class AuthorizedUser(models.Model):
+class AuthorizedUser(AbstractUser):
     """Custom user model class"""
     pass
