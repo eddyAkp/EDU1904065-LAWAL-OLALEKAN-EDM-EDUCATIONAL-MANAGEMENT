@@ -57,3 +57,6 @@ class AuthorizedUser(AbstractUser):
     position = models.CharField(max_length=100, choices=LIBRARY_POSITION_CHOICES, blank=True)
 
     objects = AuthorizedUserManager()
+
+    def __str__(self) -> str:
+        return f'{self.email}'
