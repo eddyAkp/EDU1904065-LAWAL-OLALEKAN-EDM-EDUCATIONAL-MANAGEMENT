@@ -12,4 +12,5 @@ LIBRARY_POSITION_CHOICES = (
 
 class AuthorizedUser(AbstractUser):
     """Custom user model class"""
-    pass
+    library_name = models.CharField(max_length=100, blank=True)
+    position = models.CharField(max_length=100, choices=LIBRARY_POSITION_CHOICES, blank=True)
