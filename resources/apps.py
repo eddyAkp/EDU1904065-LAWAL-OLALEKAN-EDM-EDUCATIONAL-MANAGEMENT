@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ResoursesConfig(AppConfig):
+class ResourcesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'resourses'
+    name = 'resources'
