@@ -34,3 +34,12 @@ class SerialPrintMediaMaterial(PrintMediaMaterial):
         null=False, blank=False, max_length=100,
     )
     serial = models.CharField(max_length=100)
+
+    def serialization_display(self) -> str:
+        """
+        Return serialization mode and serial information.
+        Example:
+            SerialPrintMediaMaterial("Issue", "1").serialization_display()
+            returns "Issue 1"
+        """
+        return self.serialization_mode + " " + self.serial
