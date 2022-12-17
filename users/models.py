@@ -46,5 +46,14 @@ class AuthorizedUserManager(BaseUserManager):
 
 class AuthorizedUser(AbstractUser):
     """Custom user model class"""
+
+    username = None
+
+    email = models.EmailField(_('email_address'), unique=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
     library_name = models.CharField(max_length=100, blank=True)
     position = models.CharField(max_length=100, choices=LIBRARY_POSITION_CHOICES, blank=True)
+
+    objects = AuthorizedUserManager()
