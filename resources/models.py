@@ -11,6 +11,11 @@ MODE_OF_SERIALISATION: tuple = (
 class Author(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
 
+    objects = models.Manager()
+
+    def __str__(self) -> str:
+        return f'{self.name}'
+
 
 class InformationMaterial(models.Model):
     title = models.CharField(max_length=1000, blank=False, null=False)
@@ -18,14 +23,27 @@ class InformationMaterial(models.Model):
     price_per_unit = models.PositiveIntegerField(default=1)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
+    objects = models.Manager()
+
+    def __str__(self) -> str:
+        return f'{self.title}, {self.author.name} '
+
 
 class AudioVisualMaterial(InformationMaterial):
-    pass
+    objects = models.Manager()
+
+    def __str__(self) -> str:
+        return super().__str__()
 
 
 class PrintMediaMaterial(InformationMaterial):
     ISBN = models.CharField(max_length=30)
     publish_date = models.DateField(blank=True)
+
+    objects = models.Manager()
+
+    def __str__(self) -> str:
+        return super().__str__() + f'{self.ISBN}'
 
 
 class SerialPrintMediaMaterial(PrintMediaMaterial):
@@ -35,6 +53,8 @@ class SerialPrintMediaMaterial(PrintMediaMaterial):
     )
     serial = models.CharField(max_length=100)
 
+    objects = models.Manager()
+
     def serialization_display(self) -> str:
         """
         Return serialization mode and serial information.
@@ -43,3 +63,6 @@ class SerialPrintMediaMaterial(PrintMediaMaterial):
             returns "Issue 1"
         """
         return self.serialization_mode + " " + self.serial
+
+    def __str__(self) -> str:
+        return super().__str__() + f'{self.serialization_display}'
