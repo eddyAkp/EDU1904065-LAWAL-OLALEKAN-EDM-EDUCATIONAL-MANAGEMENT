@@ -72,4 +72,4 @@ class SerialMaterial(InformationMaterial):
         return 'Volume ' + self.volume_number + " Issue " + self.issue_number
 
     def __str__(self) -> str:
-        return super().__str__() + f'{self.serialization_display}'
+        return super().__str__() + f'{self.serialization_display()}'
