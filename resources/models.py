@@ -2,10 +2,17 @@ from django.db import models
 
 # Create your models here.
 
-MODE_OF_SERIALISATION: tuple = (
-    ("Episode", "Episode"),
-    ("Issue", "Issue"),
-)
+
+EDITIONS = (
+    ("Revised", "Revised"),
+    ("First", "First"),
+    ("Second", "Second"),
+    ("Third", "Third"),
+    ("Fourth", "Fourth"),
+    ("Fifth", "Fifth"),
+    ("Sixth", "Sixth"),
+    ("Seventh", "Seventh"),
+)  # TODO: Generator for editions from 1 -> 100
 
 
 class Author(models.Model):
@@ -39,6 +46,7 @@ class AudioVisualMaterial(InformationMaterial):
 class PrintMediaMaterial(InformationMaterial):
     ISBN = models.CharField(max_length=30)
     publish_date = models.DateField(blank=True)
+    edition = models.CharField(max_length=100, choices=EDITIONS, blank=True)
 
     objects = models.Manager()
 
