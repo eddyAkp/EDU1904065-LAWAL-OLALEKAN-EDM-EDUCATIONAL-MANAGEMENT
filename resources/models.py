@@ -46,12 +46,11 @@ class PrintMediaMaterial(InformationMaterial):
         return super().__str__() + f'{self.ISBN}'
 
 
-class SerialPrintMediaMaterial(PrintMediaMaterial):
-    serialization_mode = models.CharField(
-        choices=MODE_OF_SERIALISATION,
-        null=False, blank=False, max_length=100,
-    )
-    serial = models.CharField(max_length=100)
+class SerialMaterial(InformationMaterial):
+    ISSN = models.CharField(max_length=30, blank=True)
+    issue_number = models.PositiveIntegerField()
+    volume_number = models.PositiveIntegerField()
+    publish_date = models.DateField(blank=True)
 
     objects = models.Manager()
 
