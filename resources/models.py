@@ -24,7 +24,7 @@ class Author(models.Model):
         return f'{self.name}'
 
 
-class InformationMaterial(models.Model):
+class InformationMaterial(models.Model):  # Base Class
     title = models.CharField(max_length=1000, blank=False, null=False)
     quantity = models.PositiveIntegerField(default=1)
     price_per_unit = models.PositiveIntegerField(default=1)
