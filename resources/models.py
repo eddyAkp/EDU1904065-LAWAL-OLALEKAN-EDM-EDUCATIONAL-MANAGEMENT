@@ -69,7 +69,7 @@ class SerialMaterial(InformationMaterial):
             SerialPrintMediaMaterial("Issue", "1").serialization_display()
             returns "Issue 1"
         """
-        return 'Volume ' + self.volume_number + " Issue " + self.issue_number
+        return 'Volume ' + str(self.volume_number) + " Issue " + str(self.issue_number)
 
     def __str__(self) -> str:
         return super().__str__() + f'{self.serialization_display()}'
