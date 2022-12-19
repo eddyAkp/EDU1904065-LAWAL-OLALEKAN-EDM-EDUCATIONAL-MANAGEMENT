@@ -17,7 +17,8 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 @admin.register(AudioVisualMaterial)
-class AudioVisualMaterialAdmin(admin.ModelAdmin): pass
+class AudioVisualMaterialAdmin(admin.ModelAdmin):
+    list_display = BASE_LIST_DISPLAY
 
 
 @admin.register(PrintMediaMaterial)
