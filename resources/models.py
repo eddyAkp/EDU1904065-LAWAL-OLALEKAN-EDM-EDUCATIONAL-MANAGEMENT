@@ -57,7 +57,7 @@ class PrintMediaMaterial(InformationMaterial):
     objects = models.Manager()
 
     def __str__(self) -> str:
-        return super().__str__() + f'{self.ISBN}'
+        return super().__str__() + f'ISBN: {self.ISBN}'
 
 
 class SerialMaterial(InformationMaterial):
@@ -78,4 +78,4 @@ class SerialMaterial(InformationMaterial):
         return 'Volume ' + str(self.volume_number) + " Issue " + str(self.issue_number)
 
     def __str__(self) -> str:
-        return super().__str__() + f'{self.serialization_display()}'
+        return super().__str__() + f'{self.serialization_display()}, ISSN: {self.ISSN}'
