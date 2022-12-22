@@ -12,6 +12,7 @@ from resources.models import (AudioVisualMaterial, PrintMediaMaterial)
 class InventoryListView(generic.ListView, LoginRequiredMixin):
     context_object_name = "resources"
     template_name = "inventory/inventory_list_view.html"
+    paginate_by = 40
 
     def get_queryset(self):
         return list(
