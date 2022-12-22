@@ -10,3 +10,4 @@ LEVEL: 200
 
 ## Usage:
 - Run 'python run.py' on your command prompt (Windows).
+- Then open brower tab and go to localhost url in console.
