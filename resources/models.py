@@ -35,6 +35,12 @@ class InformationMaterial(models.Model):  # Base Class
     def __str__(self) -> str:
         return f'{self.title}, {self.author.name} '
 
+    def resource_type(self):
+        return self.__repr__().split()[0][1:-1]
+
+    def resource_details(self):
+        return self.resource_type() + ' ' + f'id: {self.id}'
+
 
 class AudioVisualMaterial(InformationMaterial):
     objects = models.Manager()
