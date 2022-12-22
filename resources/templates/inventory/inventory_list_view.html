@@ -1,0 +1,97 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+    <title>Inventory Listing</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<!--<h1 class="text-3xl font-bold underline">-->
+<!--    Hello world!-->
+<!--</h1>-->
+<div class="container mx-auto max-w-screen-xl my-28">
+    <h1 class="text-[40px] font-medium">Resource Listing</h1>
+    <form>
+        <div class="mb-6">
+            <input type="text" id="id_emailtitle"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Search (by title)..." required>
+        </div>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal pt-56">
+        <div class="flex justify-center">
+            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+                <!-- <span class="close-button"></span> -->
+                <h5 id="modal-title" class="text-gray-900 text-xl leading-tight font-medium mb-2"></h5>
+                <p id="modal-stock-count" class="text-gray-700 text-base mb-4"></p>
+                <p id="modal-cost-per-unit" class="text-gray-700 text-base mb-4"></p>
+                <div class="grid grid-cols-2 gap-x-1">
+                    <label for="modal-order-quantity">Order Quantity</label>
+                    <input type="number" style="margin-left: -50px" id="modal-order-quantity"
+                           class="border-solid border-2 border-black text-gray-700 text-base mb-4">
+                </div>
+                <p class="pb-4" id="pricing-estimate"></p>
+                <div class="grid grid-cols-2">
+                    <button type="button" id="order-now-button" style="padding-right: 185px; padding-left: 150px;"
+                            class="order-now-button inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                        Order Now!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+
+    <div>
+        <ol class="bg-white rounded-lg border border-gray-200 w-auto text-gray-900 pb-4">
+            {% for resource in resources %}
+            <li data-resource_detail="{{ resource.resource_details }}"
+                class="resource-list-object px-6 py-2 border-b border-gray-200 w-full rounded-t-lg rounded-b hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600"
+                style="cursor: pointer;">
+                {{ resource }}
+            </li>
+            {% endfor %}
+        </ol>
+
+        {% if is_paginated %}
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">« Previous page</a>
+
+        {% if page_obj.number > 3 %}
+        <a href="?page=1">1</a>
+        {% if page_obj.number > 4 %}
+        <span>...</span>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <a href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+        <span>...</span>
+        <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+        {% elif page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+        <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+
+        <a href="?page={{ page_obj.next_page_number }}">Next Page »</a>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
